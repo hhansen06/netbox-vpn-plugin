@@ -1,5 +1,5 @@
 from netbox.forms import NetBoxModelForm
-from utilities.forms.fields import CommentField, DynamicModelChoiceField
+from utilities.forms.fields import CommentField
 
 from .models import VpnConnection
 

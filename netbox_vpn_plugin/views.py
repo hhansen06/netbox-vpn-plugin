@@ -7,6 +7,7 @@ class VpnConnectionView(generic.ObjectView):
     queryset = models.VpnConnection.objects.all()
 
 class VpnConnectionListView(generic.ObjectListView):
+    queryset = models.VpnConnection.objects.all()
     table = tables.VpnConnectionListTable
 
 

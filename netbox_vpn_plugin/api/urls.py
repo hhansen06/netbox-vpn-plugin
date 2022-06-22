@@ -5,6 +5,6 @@ from . import views
 app_name = 'netbox_vpn_plugin'
 
 router = NetBoxRouter()
-router.register('connections', views.VpnConnectionViewSet)
+router.register('connection', views.VpnConnectionViewSet)
 
 urlpatterns = router.urls

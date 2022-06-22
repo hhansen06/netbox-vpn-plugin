@@ -3,7 +3,6 @@ from django.db import models
 from django.urls import reverse
 
 from netbox.models import NetBoxModel
-from utilities.choices import ChoiceSet
 
 class VpnConnection(NetBoxModel):
     gegenstelle = models.CharField(
@@ -59,6 +58,3 @@ class VpnConnection(NetBoxModel):
 
     def get_absolute_url(self):
         return reverse('plugins:netbox_vpn_plugin:connection', args=[self.pk])
-
-    def get_default_action_color(self):
-        return ActionChoices.colors.get(self.default_action)
