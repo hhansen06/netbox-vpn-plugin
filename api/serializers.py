@@ -1,12 +1,16 @@
 from rest_framework import serializers
 
-from ipam.api.serializers import NestedPrefixSerializer
-from netbox.api.serializers import NetBoxModelSerializer, WritableNestedSerializer
-from ..models import Vpn
+from netbox.api.serializers import NetBoxModelSerializer
+from ..models import VpnConnection
 
 
-class VpnSerializer(NetBoxModelSerializer):
-    url = serializers.HyperlinkedIdentityField(
-        view_name='plugins-api:vpn-api:vpn-list-detail'
-    )
-    rule_count = serializers.IntegerField(read_only=True)
+class VpnConnectionSerializer(NetBoxModelSerializer):
+   
+
+    class Meta:
+        model = VpnConnection
+        fields = (
+            'id', 'display', 
+            'gegenstelle', 'comments', 'tags', 'tenant', 
+            'created', 'last_updated',
+        )
