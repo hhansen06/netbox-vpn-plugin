@@ -6,7 +6,7 @@ from utilities.choices import ButtonColorChoices
 
 menu_items = (
     PluginMenuItem(
-        link='plugins:netbox_vpn_plugin:vpn_list',
-        link_text='VPN Lists'
+        link='plugins:netbox_vpn_plugin:connection',
+        link_text='VPN Connections'
     ),
 )

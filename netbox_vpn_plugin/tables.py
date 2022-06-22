@@ -1,12 +1,12 @@
 import django_tables2 as tables
 
 from netbox.tables import NetBoxTable, ChoiceFieldColumn
-from .models import Vpn
+from .models import VpnConnection
 
-class VpnListTable(NetBoxTable):
+class VpnConnectionListTable(NetBoxTable):
 
     class Meta(NetBoxTable.Meta):
-        model = Vpn
+        model = VpnConnection
         fields = ('pk', 'gegenstelle','tenant', 'comments', 'actions')
         default_columns = ('name', 'default_action')
 

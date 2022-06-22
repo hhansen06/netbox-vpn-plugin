@@ -3,17 +3,17 @@ from netbox.views import generic
 
 from . import  forms, models, tables
 
-class VpnView(generic.ObjectView):
-    queryset = models.Vpn.objects.all()
+class VpnConnectionView(generic.ObjectView):
+    queryset = models.VpnConnection.objects.all()
 
-class VpnListView(generic.ObjectListView):
-    table = tables.VpnListTable
-
-
-class VpnEditView(generic.ObjectEditView):
-    queryset = models.Vpn.objects.all()
-    form = forms.VpnForm
+class VpnConnectionListView(generic.ObjectListView):
+    table = tables.VpnConnectionListTable
 
 
-class VpnDeleteView(generic.ObjectDeleteView):
-    queryset = models.Vpn.objects.all()
+class VpnConnectionEditView(generic.ObjectEditView):
+    queryset = models.VpnConnection.objects.all()
+    form = forms.VpnConnectionForm
+
+
+class VpnConnectionDeleteView(generic.ObjectDeleteView):
+    queryset = models.VpnConnection.objects.all()

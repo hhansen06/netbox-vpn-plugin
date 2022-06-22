@@ -1,10 +1,10 @@
 from netbox.forms import NetBoxModelForm
 from utilities.forms.fields import CommentField, DynamicModelChoiceField
 
-from .models import Vpn
+from .models import VpnConnection
 
-class VpnForm(NetBoxModelForm):
+class VpnConnectionForm(NetBoxModelForm):
     comments = CommentField()
     class Meta:
-        model = Vpn
-        fields = ('gegenstelle','orginator', 'tenant', 'remote_ip', 'customer_contact', 'comments')
+        model = VpnConnection
+        fields = ('gegenstelle', 'tenant', 'remote_ip', 'customer_contact', 'comments')

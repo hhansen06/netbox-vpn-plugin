@@ -5,14 +5,24 @@ from django.urls import reverse
 from netbox.models import NetBoxModel
 from utilities.choices import ChoiceSet
 
-class Vpn(NetBoxModel):
+class VpnConnection(NetBoxModel):
     gegenstelle = models.CharField(
         max_length=100
     )
     comments = models.TextField(
         blank=True
     )
-    
+
+    ordered_by = models.TextField(
+        blank=True,
+        null=True
+    )
+
+    active_since = models.DateField(
+        blank=True,
+        null=True
+    )
+
     tenant = models.ForeignKey(
         to='tenancy.Tenant',
         on_delete=models.PROTECT,
@@ -21,7 +31,7 @@ class Vpn(NetBoxModel):
         null=False
     )
 
-    orginator = models.ForeignKey(
+    vpn_endpoint = models.ForeignKey(
         to='dcim.Device',
         on_delete=models.PROTECT,
         related_name='+',
@@ -48,7 +58,7 @@ class Vpn(NetBoxModel):
         return self.gegenstelle
 
     def get_absolute_url(self):
-        return reverse('plugins:netbox_vpn_plugin:vpn_list', args=[self.pk])
+        return reverse('plugins:netbox_vpn_plugin:connection', args=[self.pk])
 
     def get_default_action_color(self):
         return ActionChoices.colors.get(self.default_action)
