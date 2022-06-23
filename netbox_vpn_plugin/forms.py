@@ -7,4 +7,4 @@ class VpnConnectionForm(NetBoxModelForm):
     comments = CommentField()
     class Meta:
         model = VpnConnection
-        fields = ('gegenstelle', 'tenant', 'remote_ip', 'customer_contact', 'comments')
+        fields = ('remote_organisation','vpn_endpoint','active_since','tenant', 'remote_ip', 'customer_contact', 'comments')

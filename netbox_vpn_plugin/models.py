@@ -5,7 +5,7 @@ from django.urls import reverse
 from netbox.models import NetBoxModel
 
 class VpnConnection(NetBoxModel):
-    gegenstelle = models.CharField(
+    remote_organisation = models.CharField(
         max_length=100
     )
     comments = models.TextField(
@@ -51,10 +51,10 @@ class VpnConnection(NetBoxModel):
     )
     
     class Meta:
-        ordering = ('gegenstelle',)
+        ordering = ('remote_organisation',)
 
     def __str__(self):
-        return self.gegenstelle
+        return self.remote_organisation
 
     def get_absolute_url(self):
         return reverse('plugins:netbox_vpn_plugin:connection', args=[self.pk])
