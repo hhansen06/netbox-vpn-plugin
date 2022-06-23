@@ -1,7 +1,7 @@
 import django_tables2 as tables
-
 from netbox.tables import NetBoxTable
-from .models import VpnConnection
+
+from .models import VpnConnection, VpnConnectionPhase2
 
 class VpnConnectionListTable(NetBoxTable):
     remote_organisation = tables.Column(
@@ -10,8 +10,19 @@ class VpnConnectionListTable(NetBoxTable):
     
     class Meta(NetBoxTable.Meta):
         model = VpnConnection
-        fields = ('pk','id','vpn_endpoint',
-        'remote_organisation','tenant',
-        'actions')
-        default_columns = ('id','remote_organisation','tenant','vpn_endpoint')
+        extra_controls = ('add')
+        fields = ('pk','id','remote_gateway_ip','vpn_endpoint',
+        'remote_organisation','tenant','status'
+        )
 
+
+class VpnConnectionPhase2Table(NetBoxTable):
+    vpn_connection = tables.Column(
+        linkify=True
+    )
+    
+    class Meta(NetBoxTable.Meta):
+        model = VpnConnectionPhase2
+        fields = ('pk','id',
+        'name','local_address','remote_address')
+        default_columns = ('id','name','local_address','remote_address')
