@@ -6,6 +6,7 @@ from netbox.forms import NetBoxModelForm, NetBoxModelBulkEditForm, NetBoxModelFi
 from .models import VpnConnection, VpnConnectionPhase2
 from tenancy.models import Tenant, Contact
 from dcim.models import Device
+from ipam.models import Prefix
 
 from utilities.forms import (
     DynamicModelChoiceField,
@@ -27,7 +28,7 @@ class VpnConnectionForm(NetBoxModelForm):
 
     customer_contact = DynamicModelChoiceField(
         queryset=Contact.objects.all(),
-        required=True
+        required=False
     )
 
     fieldsets = (
@@ -69,6 +70,11 @@ class VpnConnectionPhase2Form(NetBoxModelForm):
     vpn_connection = DynamicModelChoiceField(
         queryset=VpnConnection.objects.all()
     )
+    local_address = DynamicModelChoiceField(
+        queryset=Prefix.objects.all(),
+        required=True
+    )
+
 
     class Meta:
         model = VpnConnectionPhase2

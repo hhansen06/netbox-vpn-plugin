@@ -1,6 +1,7 @@
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
 from django.urls import reverse
+from pkg_resources import require
 from utilities.choices import ChoiceSet
 
 from netbox.models import NetBoxModel
@@ -223,7 +224,7 @@ class VpnConnection(NetBoxModel):
     accept_peer_id = models.CharField(
         max_length=100,
         help_text="If Accept types = specific peer ID, define remote peer Id here",
-         blank=True,
+        blank=True,
         null=True,
     )
 
@@ -274,13 +275,15 @@ class VpnConnectionPhase2(NetBoxModel):
     name = models.CharField(
         max_length=50
     )
-    local_address = models.GenericIPAddressField(
-       blank=True,
-       null=True,
+    local_address = models.ForeignKey(
+        to='ipam.Prefix',
+        on_delete=models.PROTECT,
+        related_name='+',
     )
-    remote_address = models.GenericIPAddressField(
-       blank=True,
-       null=True,
+    remote_address = models.CharField(
+       max_length=50,
+       blank=False,
+       null=False,
     )
     encrytion = models.CharField(
         max_length=50,
