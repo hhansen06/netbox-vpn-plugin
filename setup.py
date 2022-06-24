@@ -2,7 +2,7 @@ from setuptools import find_packages, setup
 
 setup(
     name='netbox-vpn-plugin',
-    version='0.6',
+    version='0.7',
     download_url='https://github.com/hhansen06/netbox-vpn-plugin/archive/refs/tags/0.5.tar.gz',
     description='Manage VPN Connections in Netbox',
     install_requires=[],

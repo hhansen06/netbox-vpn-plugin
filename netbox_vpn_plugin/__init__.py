@@ -6,7 +6,7 @@ class NetBoxVpnConfig(PluginConfig):
     author = "Henrik Hansen"
     author_email = "henrik.hansen@cgi.com"
     description = 'Manage VPN Configurations for Tenants'
-    version = '0.6'
+    version = '0.7'
     base_url = 'vpn'
     
 config = NetBoxVpnConfig

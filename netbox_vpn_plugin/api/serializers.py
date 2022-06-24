@@ -9,7 +9,7 @@ class VpnConnectionSerializer(NetBoxModelSerializer):
         model = VpnConnection
         fields = (
             'id', 'display', 
-            'vpn_endpoint', 'remote_organisation', 'comments', 'tags', 'tenant', 
+            'vpn_endpoint', 'customer_contact', 'comments', 'change_id', 'ordered_by', 'status', 'active_since','tenant','vpn_endpoint','remote_gateway_ip','nat_traversal','dead_pear_detection','auth_method','pre_shared_key','ike_version','accept_types','accept_peer_id','encrytion','authentication','dh_group','key_lifetime','local_id'
             'created', 'last_updated',
         )
 
