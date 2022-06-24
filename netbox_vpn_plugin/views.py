@@ -17,6 +17,8 @@ class VpnConnectionView(generic.ObjectView):
 class VpnConnectionListView(generic.ObjectListView):
     queryset = models.VpnConnection.objects.all()
     filterset = VpnConnectionFilterSet
+    filterset_form = forms.VpnConnectionFilterForm
+
     action_buttons = ('add',)  
     table = tables.VpnConnectionListTable
 

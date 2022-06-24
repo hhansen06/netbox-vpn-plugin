@@ -1,10 +1,17 @@
 from django import forms
 from netbox.forms import NetBoxModelForm
 from utilities.forms.fields import CommentField, DynamicModelChoiceField
+from netbox.forms import NetBoxModelForm, NetBoxModelBulkEditForm, NetBoxModelFilterSetForm
 
 from .models import VpnConnection, VpnConnectionPhase2
 from tenancy.models import Tenant, Contact
 from dcim.models import Device
+
+from utilities.forms import (
+    DynamicModelChoiceField,
+    DynamicModelMultipleChoiceField, StaticSelect,
+    APISelect, APISelectMultiple, StaticSelectMultiple, TagFilterField
+)
 
 class VpnConnectionForm(NetBoxModelForm):
     comments = CommentField()
@@ -41,6 +48,21 @@ class VpnConnectionForm(NetBoxModelForm):
     class Meta:
         model = VpnConnection
         exclude = []
+
+
+class VpnConnectionFilterForm(NetBoxModelFilterSetForm):
+    model = VpnConnection
+    q = forms.CharField(
+        required=False,
+        label='Search'
+    )
+    tenant = DynamicModelChoiceField(
+        queryset=Tenant.objects.all(),
+        required=False
+    )
+    
+    tag = TagFilterField(model)
+
 
 
 class VpnConnectionPhase2Form(NetBoxModelForm):

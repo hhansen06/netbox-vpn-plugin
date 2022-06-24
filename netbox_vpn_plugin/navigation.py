@@ -15,8 +15,4 @@ menu_items = (
             )
         ]        
     ),
-    PluginMenuItem(
-        link='plugins:netbox_vpn_plugin:vpnconnectionphase2_list',
-        link_text='Phase 2',       
-    ),
 )

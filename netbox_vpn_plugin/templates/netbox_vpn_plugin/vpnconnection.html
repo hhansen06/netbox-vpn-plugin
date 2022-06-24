@@ -116,7 +116,16 @@
     </div>
     <div class="col col-md-12">
       <div class="card">
-        <h5 class="card-header">Phase 2</h5>
+        <div class="card-header">
+          <h5>Phase 2</h5>
+          {% if perms.phase2.vpnconnectionphase2_add %}
+          <div class="pull-right noprint">
+            <a href="{% url 'plugins:netbox_vpn_plugin:vpnconnectionphase2_add' %}" type="button" class="btn btn-sm btn-success">
+            <i class="mdi mdi-plus-thick"></i> Add
+            </a>
+          </div>
+          {% endif %}
+        </div>
         <div class="card-body table-responsive">
           {% render_table phase2_table %}
         </div>
