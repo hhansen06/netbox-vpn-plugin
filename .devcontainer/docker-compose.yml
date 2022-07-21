@@ -1,0 +1,49 @@
+version: '3.4'
+services:
+  netbox:
+    build:
+      context: .
+      dockerfile: Dockerfile-plugin_dev
+    ports:
+      - 8444:8080
+    volumes: 
+      - ../:/opt/netbox/netbox/netbox-vpn-plugin
+      - ./configuration/configuration.py:/opt/netbox/netbox/netbox/configuration.py
+      - ~/.gitconfig:/home/vscode/.gitconfig:z,ro
+      - ~/.ssh:/home/vscode/.ssh
+    depends_on:
+      - postgres
+      - redis
+      - netbox-worker
+    env_file: env/netbox.env
+
+  netbox-worker:
+    build:
+      context: .
+      dockerfile: Dockerfile-plugin_dev
+    depends_on:
+      - redis
+      - postgres
+
+    command:
+      - /opt/netbox/venv/bin/python
+      - /opt/netbox/netbox/manage.py
+      - rqworker
+
+  postgres:
+    image: postgres:14-alpine
+    env_file: env/postgres.env
+    volumes:
+    - netbox-postgres-data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:6-alpine
+    command:
+    - sh
+    - -c # this is to evaluate the $REDIS_PASSWORD from the env
+    - redis-server --appendonly yes --requirepass $$REDIS_PASSWORD ## $$ because of docker-compose
+    env_file: env/redis.env
+    
+volumes:
+  netbox-postgres-data:
+    driver: local
