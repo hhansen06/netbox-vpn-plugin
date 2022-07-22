@@ -1,34 +1,20 @@
 version: '3.4'
 services:
   netbox:
+    ports:
+      - "8080:8080"
     build:
       context: .
       dockerfile: Dockerfile-plugin_dev
-    ports:
-      - 8444:8080
     volumes: 
-      - ../:/opt/netbox/netbox/netbox-vpn-plugin
+      - ../netbox-vpn-plugin:/opt/netbox/netbox/netbox-vpn-plugin
       - ./configuration/configuration.py:/opt/netbox/netbox/netbox/configuration.py
       - ~/.gitconfig:/home/vscode/.gitconfig:z,ro
       - ~/.ssh:/home/vscode/.ssh
     depends_on:
       - postgres
       - redis
-      - netbox-worker
     env_file: env/netbox.env
-
-  netbox-worker:
-    build:
-      context: .
-      dockerfile: Dockerfile-plugin_dev
-    depends_on:
-      - redis
-      - postgres
-
-    command:
-      - /opt/netbox/venv/bin/python
-      - /opt/netbox/netbox/manage.py
-      - rqworker
 
   postgres:
     image: postgres:14-alpine

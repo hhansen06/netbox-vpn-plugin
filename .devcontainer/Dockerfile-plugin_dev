@@ -1,8 +1,16 @@
 FROM netboxcommunity/netbox:v3.2-2.0.0
+EXPOSE 8080
+
+WORKDIR /opt/netbox
 
 COPY ./plugin_requirements.txt /
 RUN /opt/netbox/venv/bin/pip install  --no-warn-script-location -r /plugin_requirements.txt
 
-# These lines are only required if your plugin has its own static files.
 COPY configuration/configuration.py /etc/netbox/config/configuration.py
-RUN SECRET_KEY="dummy" /opt/netbox/venv/bin/python /opt/netbox/netbox/manage.py collectstatic --no-input
+COPY entrypoint.sh /opt/netbox
+RUN chmod ++x /opt/netbox/entrypoint.sh
+# These lines are only required if your plugin has its own static files.
+#RUN SECRET_KEY="dummy" /opt/netbox/venv/bin/python /opt/netbox/netbox/manage.py collectstatic --no-input
+
+#ENTRYPOINT ["/opt/netbox/entrypoint.sh"]
+CMD ["/opt/netbox/entrypoint.sh"]
