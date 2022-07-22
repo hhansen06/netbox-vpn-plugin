@@ -1,0 +1,139 @@
+{% extends 'generic/object.html' %}
+{% load buttons %}
+{% load static %}
+{% load plugins %}
+{% load helpers %}
+
+{% load render_table from django_tables2 %}
+
+{% block breadcrumbs %}
+{{ block.super }}
+{% endblock %}
+
+
+{% block content %}
+  <div class="row mb-3">
+    <div class="col col-md-6">
+      <div class="card">
+        <h5 class="card-header">Tunnel settings</h5>
+        <div class="card-body">
+          <table class="table table-hover attr-table">
+            <tr>
+              <th scope="row">Status</th>
+              <td>{{ object.status }}</td>
+            </tr>
+
+            <tr>
+              <th scope="row">Remote organisation</th>
+              <td>{{ object.remote_organisation }}</td>
+            </tr>
+
+            <tr>
+              <th scope="row">Vpn endpoint internal</th>
+              <td>{{ object.vpn_endpoint }}</td>
+            </tr>
+
+            <tr>
+              <th scope="row">Remote Ip</th>
+              <td>{{ object.remote_gateway_ip }}</td>
+            </tr>
+
+            <tr>
+              <th scope="row">NAT Traversal</th>
+              <td>{{ object.nat_traversal }}</td>
+            </tr>
+
+            <tr>
+              <th scope="row">Dead Peer Detection</th>
+              <td>{{ object.dead_pear_detection }}</td>
+            </tr>
+
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col col-md-6">
+      <div class="card">
+        <h5 class="card-header">Phase 1 Proposal</h5>
+        <div class="card-body">
+          <table class="table table-hover attr-table">
+            
+            <tr>
+              <th scope="row">Encrytion</th>
+              <td>{{ object.encrytion }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Authentication</th>
+              <td>{{ object.authentication }}</td>
+            </tr>
+            <tr>
+              <th scope="row">DH Group</th>
+              <td>{{ object.dh_group }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Key Lifetime</th>
+              <td>{{ object.key_lifetime }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Local ID</th>
+              <td>{{ object.local_id }}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="col col-md-6">
+      <div class="card">
+        <h5 class="card-header">Customer</h5>
+        <div class="card-body">
+          <table class="table table-hover attr-table">
+            <tr>
+              <th scope="row">Tenant</th>
+              <td>{{ object.tenant }}</td>
+            </tr>
+
+            <tr>
+              <th scope="row">Customer Contact</th>
+              <td>{{ object.customer_contact }}</td>
+            </tr>
+
+            <tr>
+              <th scope="row">Ordered by</th>
+              <td>{{ object.ordered_by }}</td>
+            </tr>
+
+            <tr>
+              <th scope="row">Change ID</th>
+              <td>{{ object.change_id }}</td>
+            </tr>
+
+
+            
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5>Phase 2</h5>
+          {% if perms.phase2.vpnconnectionphase2_add %}
+          <div class="pull-right noprint">
+            <a href="{% url 'plugins:netbox_vpn_plugin:vpnconnectionphase2_add' %}" type="button" class="btn btn-sm btn-success">
+            <i class="mdi mdi-plus-thick"></i> Add
+            </a>
+          </div>
+          {% endif %}
+        </div>
+        <div class="card-body table-responsive">
+          {% render_table phase2_table %}
+        </div>
+      </div>
+    </div>
+    <div class="col col-md-12"> 
+        {% include 'inc/panels/comments.html' %}
+    </div>
+  </div>
+
+{% endblock content %}

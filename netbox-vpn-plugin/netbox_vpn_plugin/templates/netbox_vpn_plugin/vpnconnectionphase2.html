@@ -1,0 +1,71 @@
+{% extends 'generic/object.html' %}
+{% load buttons %}
+{% load custom_links %}
+{% load helpers %}
+{% load plugins %}
+{% load render_table from django_tables2 %}
+
+
+{% block breadcrumbs %}
+{{ block.super }}
+<li class="breadcrumb-item"><a href="{% url 'plugins:netbox_vpn_plugin:vpnconnection_list' %}">VPN Connection</a></li>
+<li class="breadcrumb-item"> <a href="{{ object.vpn_connection.get_absolute_url }}">{{ object.vpn_connection }}</a></li>
+{% endblock %}
+
+
+
+{% block content %}
+  <div class="row mb-3">
+    <div class="col col-md-6">
+      <div class="card">
+        <h5 class="card-header">Phase2 Network</h5>
+        <div class="card-body">
+          <table class="table table-hover attr-table">
+            <tr>
+              <th scope="row">Access List</th>
+              <td>
+                <a href="{{ object.vpn_connection.get_absolute_url }}">{{ object.vpn_connection }}</a>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">local_address</th>
+              <td>{{ object.local_address|placeholder }}</td>
+            </tr>
+            <tr>
+              <th scope="row">remote_address</th>
+              <td>{{ object.remote_address|placeholder }}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      {% include 'inc/panels/custom_fields.html' %}
+      {% include 'inc/panels/tags.html' %}
+    </div>
+    <div class="col col-md-6">
+      <div class="card">
+        <h5 class="card-header">Advanced Phase 2 Proposal</h5>
+        <div class="card-body">
+          <table class="table table-hover attr-table">
+            <tr>
+              <th scope="row">Encrytion</th>
+              <td>{{ object.encrytion }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Authentication</th>
+              <td>{{ object.authentication }}</td>
+            </tr>
+            <tr>
+              <th scope="row">DH Group</th>
+              <td>{{ object.dh_group }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Key Lifetime</th>
+              <td>{{ object.key_lifetime }}</td>
+            </tr>
+           
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
