@@ -8,12 +8,6 @@ from tenancy.models import Tenant, Contact
 from dcim.models import Device
 from ipam.models import Prefix
 
-from utilities.forms import (
-    DynamicModelChoiceField,
-    DynamicModelMultipleChoiceField, StaticSelect,
-    APISelect, APISelectMultiple, StaticSelectMultiple, TagFilterField
-)
-
 class VpnConnectionForm(NetBoxModelForm):
     comments = CommentField()
 
